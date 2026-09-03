@@ -50,9 +50,19 @@ This project is currently under active development.
 
 ## Installation
 
-The package is **not yet published to npm**.
+The package is published on npm and is available to use immediately:
 
-For development, clone the repository and install the dependencies locally:
+```bash
+npx backloom init
+```
+
+You can also install it globally:
+
+```bash
+npm install -g backloom
+```
+
+For local development, clone the repository and install the dependencies locally:
 
 ```bash
 git clone https://github.com/sharyarnaveed/backend-cli.git
@@ -75,17 +85,17 @@ npm run build
 npm test
 ```
 
-The final CLI is intended to work as:
+The published CLI works as:
 
 ```bash
-npx create-backend init
+npx backloom init
 ```
 
 Available flags:
 
 ```bash
-create-backend --help     # Show help information
-create-backend --version  # Output the current CLI version
+backloom --help     # Show help information
+backloom --version  # Output the current CLI version
 ```
 
 ## Example
@@ -95,7 +105,7 @@ The goal is to allow developers to create a new backend project without manually
 For example:
 
 ```bash
-npx create-backend init
+npx backloom init
 ```
 
 The CLI will guide the developer through interactive prompts (project name, framework, language), generate the files, and automatically run `npm install`.
@@ -205,7 +215,7 @@ npm run build
 
 - [x] Complete test coverage
 - [x] Production build setup (`npm run build`)
-- [ ] npm package publishing
+- [x] npm package publishing
 - [ ] GitHub releases
 - [ ] Version `1.0.0`
 
