@@ -1,0 +1,7 @@
+src/
+tests/
+api/
+*.tgz
+tsconfig.json
+.git/
+dist/package.json
