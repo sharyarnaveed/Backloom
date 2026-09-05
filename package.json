@@ -1,6 +1,6 @@
 {
   "name": "backloom",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Production-ready backend project generator",
   "type": "module",
   "bin": {
@@ -8,9 +8,9 @@
   },
   "scripts": {
     "dev": "tsx src/cli.ts",
-    "build": "tsc",
+    "build": "tsc && chmod +x dist/src/cli.js",
     "test": "node --import tsx --test",
-    "prepack": "node scripts/use-npm-readme.cjs",
+    "prepack": "npm run build && node scripts/use-npm-readme.cjs",
     "postpack": "node scripts/restore-github-readme.cjs"
   },
   "keywords": [
