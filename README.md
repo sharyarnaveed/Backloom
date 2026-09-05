@@ -10,6 +10,19 @@ Create Backend CLI is designed to reduce the repetitive work involved in startin
 
 This project is currently under active development. 
 
+## What's New
+
+This release adds several user-facing features and improvements to make project generation easier and more flexible:
+
+- Backend scaffolding generator with support for both Express and Fastify.
+- JavaScript and TypeScript template support (four templates: Express+JS, Express+TS, Fastify+JS, Fastify+TS).
+- Automatic `npm install` after project creation and automatic project-name replacement in generated files.
+- CLI improvements: `init` command, positional project name (`backloom init my-api`), `--framework` and `--language` flags (supports `=` syntax), and `--help`/`-h` and `--version`/`-v` flags.
+- Robust validation and error handling: project-name validation (no empty names, no uppercase letters, disallowed characters, no leading/trailing `-`), rejects unsupported frameworks/languages, detects unknown options and missing flag values, and prevents overwriting existing directories.
+- Generated projects now include a meaningful backend structure (config, controllers, middleware, routes, services); Fastify templates include a `plugins/` structure.
+
+If you want, the release notes can be expanded into a CHANGELOG file or linked to GitHub releases.
+
 ### What Has Been Done So Far
 
 - **CLI Entrypoint & Execution Engine**: `src/cli.ts` configured as the CLI binary (`create-backend`), supporting `init` commands, as well as `--help` / `-h` and `--version` / `-v` flags.
