@@ -27,6 +27,10 @@ export async function getProjectConfig(
       {
         name: "Express",
         value: "express",
+      },
+      {
+        name: "Fastify",
+        value: "fastify",
       }
     ],
   });
