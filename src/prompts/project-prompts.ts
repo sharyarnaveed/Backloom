@@ -8,7 +8,9 @@ import { CLIError } from "../utils/errors.js";
 import { validationprojectname } from "../utils/valication.js";
 
 export async function getProjectConfig(
-  initialProjectName?: string
+  initialProjectName?: string,
+  initialFramework?: Framework,
+  initialLanguage?: Language
 ): Promise<ProjectConfig> {
   const projectName = initialProjectName ?? await input({
     message: "What is the name of your project?",
@@ -21,7 +23,9 @@ export async function getProjectConfig(
     throw new CLIError(validationResult);
   }
 
-  const framework = await select<Framework>({
+const framework =
+  initialFramework ??
+  await select<Framework>({
     message: "Which framework do you want to use?",
     choices: [
       {
@@ -31,11 +35,13 @@ export async function getProjectConfig(
       {
         name: "Fastify",
         value: "fastify",
-      }
+      },
     ],
   });
 
-  const language = await select<Language>({
+const language =
+  initialLanguage ??
+  await select<Language>({
     message: "Which language do you want to use?",
     choices: [
       {
