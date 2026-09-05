@@ -1,67 +1,126 @@
 # Backloom
 
-Backloom is a command-line tool for creating a backend project quickly from a ready starter template.
+Backloom is a simple command-line tool to scaffold a backend project from ready starter templates. It creates a full project skeleton, replaces placeholders with your project name, and runs `npm install` so the new project is ready to run.
 
-It asks a few questions, creates the project folder, copies the correct template files, replaces the project name placeholders, and runs `npm install` inside the generated project.
+## Quick start
 
-## Run With npx
-
-Create a new backend project:
+Create a new backend project (interactive):
 
 ```bash
 npx backloom init
 ```
 
-Create a project with a name directly:
+Create a project and set the name in one command:
 
 ```bash
 npx backloom init my-api
 ```
 
-Then enter the generated project and start it:
+Or install globally and run directly:
+
+```bash
+npm install -g backloom
+backloom init my-api
+```
+
+After generation:
 
 ```bash
 cd my-api
 npm run dev
 ```
 
-## Install Globally
+## What's new / key features
 
-You can also install it globally:
+- Project scaffolding with useful backend structure (config, controllers, routes, services, middleware).
+- Templates for both Express and Fastify.
+- Templates for JavaScript and TypeScript.
+- Automatic `npm install` after project creation.
+- Automatic project-name replacement in template files (`{{PROJECT_NAME}}`).
+- Template resolution works correctly when Backloom is installed from npm.
+
+Current supported template combinations:
+
+- Express + JavaScript
+- Express + TypeScript
+- Fastify + JavaScript
+- Fastify + TypeScript
+
+## CLI usage examples
+
+- Interactive init (prompts for missing values):
 
 ```bash
-npm install -g backloom
+backloom init
 ```
 
-Then run:
+- Positional project name:
 
 ```bash
 backloom init my-api
 ```
 
-## What The Command Does
+- Specify framework:
 
-When you run `backloom init`, Backloom:
+```bash
+backloom init my-api --framework fastify
+```
 
-- Asks for the project name if you did not pass one.
-- Lets you choose a backend framework.
-- Lets you choose JavaScript or TypeScript.
-- Creates a new project directory.
-- Copies the matching backend starter template.
-- Replaces `{{PROJECT_NAME}}` placeholders with your project name.
-- Runs `npm install` in the new project.
-- Shows the next commands to start your backend.
+- Specify language:
 
-## Current Templates
+```bash
+backloom init my-api --language javascript
+```
 
-Backloom currently supports:
+- Combined flags:
 
-- Express with JavaScript
-- Express with TypeScript
+```bash
+backloom init my-api --framework fastify --language typescript
+```
 
-More templates are planned.
+- Use `=` syntax if you prefer:
 
-## Useful Commands
+```bash
+backloom init my-api --framework=fastify --language=typescript
+```
+
+- Standard CLI flags:
+
+```bash
+-h, --help      Show help
+-v, --version   Show Backloom version
+```
+
+## Validation & error handling
+
+Backloom validates input and handles common errors to prevent broken projects:
+
+- Project-name validation: rejects empty names, names with uppercase letters, invalid characters, or names that start/end with `-`.
+- Rejects unsupported frameworks or languages.
+- Rejects unknown CLI options and detects missing flag values.
+- Prevents overwriting an existing directory with the same project name.
+- CLI exits with clear error messages and appropriate process exit codes on failure.
+
+## Generated project structure
+
+Generated projects include a useful backend layout. Example:
+
+```text
+my-api/
+├── src/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── routes/
+│   ├── services/
+│   └── ...
+├── package.json
+└── ...
+```
+
+Fastify templates also include a `plugins/` structure for organizing Fastify plugins.
+
+## Useful commands
 
 Show help:
 
@@ -77,4 +136,7 @@ npx backloom --version
 
 ## Notes
 
-Backloom will not overwrite an existing folder with the same project name. If the folder already exists, choose a different project name or remove the existing folder first.
+- Backloom will not overwrite an existing folder with the same project name; remove or choose a different name first.
+- Templates are intentionally small and opinionated to give you a solid starting point — you can customize after generation.
+
+If you'd like, I can also add short examples for how to run the generated projects (e.g., `npm run dev` scripts) or show one template's file list.

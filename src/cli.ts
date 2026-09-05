@@ -3,9 +3,9 @@
 import { getProjectConfig } from "./prompts/project-prompts.js";
 import { generateProject } from "./generator/project-generator.js";
 const command = process.argv[2];
-const projectName = process.argv[3];
+const cliArgs = process.argv.slice(3);
 import packageJson from "../package.json" with { type: "json" };
-
+import { parseArguments } from "./utils/arguments.js";
 
 
 
@@ -31,13 +31,16 @@ Options:
   return;
 }
   if (command !== "init") {
-    console.error("\nUsage: backloom init");
+    console.error("\nUsage: backloom init [project-name]");
     process.exit(1);
   }
   console.log("Backloom\n");
-
-  const config = await getProjectConfig(projectName);
-
+const args = parseArguments(cliArgs);
+const config = await getProjectConfig(
+  args.projectName,
+  args.framework,
+  args.language
+);
   console.log("\nYour configuration:");
   console.log(`  Project: ${config.projectName}`);
   console.log(`  Framework: ${config.framework}`);
