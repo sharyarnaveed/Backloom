@@ -229,8 +229,6 @@ npm run build
 - [x] Complete test coverage
 - [x] Production build setup (`npm run build`)
 - [x] npm package publishing
-- [ ] GitHub releases
-- [ ] Version `1.0.0`
 
 ## Contributing
 
