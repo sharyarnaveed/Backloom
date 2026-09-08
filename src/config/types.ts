@@ -1,6 +1,7 @@
 export type Framework =
   | "express"
-  | "fastify";
+  | "fastify"
+  |"nestjs";
 
 export type Language =
   | "typescript"

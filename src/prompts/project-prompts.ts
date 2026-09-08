@@ -36,6 +36,10 @@ const framework =
         name: "Fastify",
         value: "fastify",
       },
+       {
+        name: "Nest JS",
+        value: "nestjs",
+      },
     ],
   });
 

@@ -29,11 +29,16 @@ export function parseArguments(args: string[]): CLIArguments {
 if (!framework) {
   throw new CLIError("Missing value for --framework.");
 }
-      if (framework !== "express" && framework !== "fastify") {
-        throw new CLIError(
-          "Framework must be either express or fastify."
-        );
-      }
+  if (
+  framework !== "express" &&
+  framework !== "fastify" &&
+  framework !== "nestjs"
+) {
+  throw new CLIError(
+    "Framework must be either express, fastify, or nestjs."
+  );
+
+}
 
       result.framework = framework;
       continue;
