@@ -3,6 +3,7 @@ import type {
   Framework,
   Language,
   ProjectConfig,
+  Database
 } from "../config/types.js";
 import { CLIError } from "../utils/errors.js";
 import { validationprojectname } from "../utils/valication.js";
@@ -10,7 +11,8 @@ import { validationprojectname } from "../utils/valication.js";
 export async function getProjectConfig(
   initialProjectName?: string,
   initialFramework?: Framework,
-  initialLanguage?: Language
+  initialLanguage?: Language,
+  initialDatabase?: Database
 ): Promise<ProjectConfig> {
   const projectName = initialProjectName ?? await input({
     message: "What is the name of your project?",
@@ -58,10 +60,25 @@ const language =
       },
     ],
   });
-
+const database =
+  initialDatabase ??
+  await select<Database>({
+    message: "Which database do you want to use?",
+    choices: [
+      {
+        name: "PostgreSQL",
+        value: "postgresql",
+      },
+      {
+        name: "None",
+        value: "none",
+      },
+    ],
+  });
   return {
     projectName,
     framework,
     language,
+    database
   };
 }

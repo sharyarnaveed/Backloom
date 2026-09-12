@@ -39,12 +39,14 @@ const args = parseArguments(cliArgs);
 const config = await getProjectConfig(
   args.projectName,
   args.framework,
-  args.language
+  args.language,
+  args.database
 );
-  console.log("\nYour configuration:");
-  console.log(`  Project: ${config.projectName}`);
-  console.log(`  Framework: ${config.framework}`);
-  console.log(`  Language: ${config.language}`);
+console.log("\nYour configuration:");
+console.log(`  Project: ${config.projectName}`);
+console.log(`  Framework: ${config.framework}`);
+console.log(`  Language: ${config.language}`);
+console.log(`  Database: ${config.database}`);
 
   await generateProject(config);
 
