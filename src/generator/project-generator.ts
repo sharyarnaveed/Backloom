@@ -8,7 +8,8 @@ import {
   replaceInDirectory,
 } from "../utils/filesystem.js";
 import { installpackage } from "../utils/packagemanager.js";
-
+import { setupDatabase } from "../database/database-setup.js";
+import { setupPrisma } from "../orm/prisma-setup.js";
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 async function resolveTemplatePath(
@@ -62,12 +63,27 @@ export async function generateProject(
   console.log(`Using template: ${templatePath}`);
 
 
-  await copyDirectory(templatePath, projectPath);
-  await replaceInDirectory(
-    projectPath,
-    "{{PROJECT_NAME}}",
-    config.projectName
+await copyDirectory(templatePath, projectPath);
+
+await replaceInDirectory(
+  projectPath,
+  "{{PROJECT_NAME}}",
+  config.projectName
+);
+
+await setupDatabase(
+  config.database,
+  config.language,
+  projectPath
+);
+
+if (config.orm === "prisma") {
+  await setupPrisma(
+    config.language,
+    projectPath
   );
-  console.log("\nInstalling dependencies...");
-  await installpackage(projectPath)
+}
+
+console.log("\nInstalling dependencies...");
+await installpackage(projectPath);
 }

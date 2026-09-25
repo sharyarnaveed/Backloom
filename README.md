@@ -214,6 +214,26 @@ npm run build
 - [x] Configuration system
 - [x] Automatic dependency installation (`npm install` after generation)
 - [ ] Additional project templates (Fastify, Hono)
+- [ ] PostgreSQL
+- [ ] Database configuration
+- [ ] Prisma
+- [ ] PostgreSQL + Prisma integration
+
+- [ ] Database-aware templates
+- [ ] backloom generate
+- [ ] backloom generate resource
+- [ ] backloom add
+- [ ] Redis
+- [ ] Authentication
+- [ ] Swagger/OpenAPI
+- [ ] Docker
+- [ ] Testing
+- [ ] backloom check
+- [ ] backloom doctor
+- [ ] backloom routes
+- [ ] backloom upgrade
+- [ ] Presets
+- [ ] Declarative configuration
 
 ### Developer Experience
 

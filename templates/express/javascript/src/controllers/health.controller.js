@@ -1,5 +1,10 @@
-import { getHealth } from "../services/health.service.js";
+import { checkDatabaseConnection } from "../config/database.js";
 
-export function healthController(_req, res) {
-  res.json(getHealth());
+export async function getHealth() {
+  await checkDatabaseConnection();
+
+  return {
+    status: "ok",
+    database: "connected",
+  };
 }
