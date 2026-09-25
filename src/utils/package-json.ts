@@ -13,13 +13,34 @@ export async function addDependency(
     await readFile(packageJsonPath, "utf-8")
   );
 
-const dependencyType = dev
-  ? "devDependencies"
-  : "dependencies";
+  const dependencyType = dev
+    ? "devDependencies"
+    : "dependencies";
 
-packageJson[dependencyType] ??= {};
+  packageJson[dependencyType] ??= {};
 
-packageJson[dependencyType][dependency] = version;
+  packageJson[dependencyType][dependency] = version;
+
+  await writeFile(
+    packageJsonPath,
+    JSON.stringify(packageJson, null, 2) + "\n"
+  );
+}
+
+export async function addScript(
+  projectPath: string,
+  scriptName: string,
+  command: string
+): Promise<void> {
+  const packageJsonPath = path.join(projectPath, "package.json");
+
+  const packageJson = JSON.parse(
+    await readFile(packageJsonPath, "utf-8")
+  );
+
+  packageJson.scripts ??= {};
+
+  packageJson.scripts[scriptName] = command;
 
   await writeFile(
     packageJsonPath,

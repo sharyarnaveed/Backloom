@@ -1,11 +1,11 @@
 import { Controller, Get } from "@nestjs/common";
-import { checkDatabaseConnection } from "./database/database.js";
+import { prisma } from "./database/prisma.js";
 
 @Controller()
 export class AppController {
   @Get("health")
   async getHealth() {
-    await checkDatabaseConnection();
+    await prisma.$queryRaw`SELECT 1`;
 
     return {
       status: "ok",

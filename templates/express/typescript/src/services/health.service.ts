@@ -1,7 +1,7 @@
-import { checkDatabaseConnection } from "../config/database.js";
+import { prisma } from "../config/prisma.js";
 
 export async function getHealth() {
-  await checkDatabaseConnection();
+  await prisma.$queryRaw`SELECT 1`;
 
   return {
     status: "ok",

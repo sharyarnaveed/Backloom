@@ -40,14 +40,15 @@ const config = await getProjectConfig(
   args.projectName,
   args.framework,
   args.language,
-  args.database
+  args.database,
+  args.orm
 );
 console.log("\nYour configuration:");
 console.log(`  Project: ${config.projectName}`);
 console.log(`  Framework: ${config.framework}`);
 console.log(`  Language: ${config.language}`);
 console.log(`  Database: ${config.database}`);
-
+console.log(`  ORM: ${config.orm}`);
   await generateProject(config);
 
   console.log("\nProject created successfully!");

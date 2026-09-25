@@ -9,6 +9,7 @@ import {
 } from "../utils/filesystem.js";
 import { installpackage } from "../utils/packagemanager.js";
 import { setupDatabase } from "../database/database-setup.js";
+import { setupPrisma } from "../orm/prisma-setup.js";
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 async function resolveTemplatePath(
@@ -75,6 +76,13 @@ await setupDatabase(
   config.language,
   projectPath
 );
+
+if (config.orm === "prisma") {
+  await setupPrisma(
+    config.language,
+    projectPath
+  );
+}
 
 console.log("\nInstalling dependencies...");
 await installpackage(projectPath);

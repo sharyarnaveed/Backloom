@@ -3,7 +3,8 @@ import type {
   Framework,
   Language,
   ProjectConfig,
-  Database
+  Database,
+  ORM,
 } from "../config/types.js";
 import { CLIError } from "../utils/errors.js";
 import { validationprojectname } from "../utils/valication.js";
@@ -12,12 +13,15 @@ export async function getProjectConfig(
   initialProjectName?: string,
   initialFramework?: Framework,
   initialLanguage?: Language,
-  initialDatabase?: Database
+  initialDatabase?: Database,
+  initialORM?: ORM
 ): Promise<ProjectConfig> {
-  const projectName = initialProjectName ?? await input({
-    message: "What is the name of your project?",
-    validate: validationprojectname
-  });
+  const projectName =
+    initialProjectName ??
+    await input({
+      message: "What is the name of your project?",
+      validate: validationprojectname,
+    });
 
   const validationResult = validationprojectname(projectName);
 
@@ -25,60 +29,79 @@ export async function getProjectConfig(
     throw new CLIError(validationResult);
   }
 
-const framework =
-  initialFramework ??
-  await select<Framework>({
-    message: "Which framework do you want to use?",
-    choices: [
-      {
-        name: "Express",
-        value: "express",
-      },
-      {
-        name: "Fastify",
-        value: "fastify",
-      },
-       {
-        name: "Nest JS",
-        value: "nestjs",
-      },
-    ],
-  });
+  const framework =
+    initialFramework ??
+    await select<Framework>({
+      message: "Which framework do you want to use?",
+      choices: [
+        {
+          name: "Express",
+          value: "express",
+        },
+        {
+          name: "Fastify",
+          value: "fastify",
+        },
+        {
+          name: "Nest JS",
+          value: "nestjs",
+        },
+      ],
+    });
 
-const language =
-  initialLanguage ??
-  await select<Language>({
-    message: "Which language do you want to use?",
-    choices: [
-      {
-        name: "TypeScript",
-        value: "typescript",
-      },
-      {
-        name: "JavaScript",
-        value: "javascript",
-      },
-    ],
-  });
-const database =
-  initialDatabase ??
-  await select<Database>({
-    message: "Which database do you want to use?",
-    choices: [
-      {
-        name: "PostgreSQL",
-        value: "postgresql",
-      },
-      {
-        name: "None",
-        value: "none",
-      },
-    ],
-  });
+  const language =
+    initialLanguage ??
+    await select<Language>({
+      message: "Which language do you want to use?",
+      choices: [
+        {
+          name: "TypeScript",
+          value: "typescript",
+        },
+        {
+          name: "JavaScript",
+          value: "javascript",
+        },
+      ],
+    });
+
+  const database =
+    initialDatabase ??
+    await select<Database>({
+      message: "Which database do you want to use?",
+      choices: [
+        {
+          name: "PostgreSQL",
+          value: "postgresql",
+        },
+        {
+          name: "None",
+          value: "none",
+        },
+      ],
+    });
+
+  const orm =
+    initialORM ??
+    await select<ORM>({
+      message: "Which ORM do you want to use?",
+      choices: [
+        {
+          name: "Prisma",
+          value: "prisma",
+        },
+        {
+          name: "None",
+          value: "none",
+        },
+      ],
+    });
+
   return {
     projectName,
     framework,
     language,
-    database
+    database,
+    orm,
   };
 }
