@@ -1,9 +1,15 @@
 import { Controller, Get } from "@nestjs/common";
+import { checkDatabaseConnection } from "./database/database.js";
 
 @Controller()
 export class AppController {
-  @Get()
-  getHello(): string {
-    return "Hello from {{PROJECT_NAME}}";
+  @Get("health")
+  async getHealth() {
+    await checkDatabaseConnection();
+
+    return {
+      status: "ok",
+      database: "connected",
+    };
   }
 }

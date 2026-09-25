@@ -28,21 +28,22 @@ export async function setupDatabase(
       "pg",
       "^8.16.3"
     );
-    await addDependency(
-  projectPath,
-  "dotenv",
-  "^17.2.2"
-);
 
+    await addDependency(
+      projectPath,
+      "dotenv",
+      "^17.2.2"
+    );
+
+    if (language === "typescript") {
+      await addDependency(
+        projectPath,
+        "@types/pg",
+        "^8.15.5",
+        true
+      );
+    }
 
     return;
   }
-  if (language === "typescript") {
-  await addDependency(
-    projectPath,
-    "@types/pg",
-    "^8.15.5",
-    true
-  );
-}
 }
